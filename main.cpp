@@ -19,7 +19,8 @@ using namespace std;
 double delta(double, double, double);
 double valore1(double, double, double);
 double valore2(double, double, double);
-void stampaEq(double, double);
+void stampaEqY(double, double);
+void stampaEqX(double);
 
 
 /*
@@ -68,46 +69,59 @@ int main(int argc, char** argv)
     aF = b1T * b1T + 2 * b2T * b0T - 4 * a0T * c2T - 4 * a2T * c0T;
     bF = 2 * b1T * b0T - 4 * a0T * c1T;
     cF = b0T * b0T - 4 * a0T * c0T;
-    
-    deltaM = delta(aF, bF, cF);
-    if (deltaM < 0)
-    {
-        stato = 0;
-    }
-    else if (deltaM == 0)
-    {
-        stato = 1;
-        m1 = valore1(aF, bF, deltaM);
-        k1 = y - x * m1;
-    }
-    else
-    {
-        stato = 2;
-        m1 = valore1(aF, bF, deltaM);
-        m2 = valore2(aF, bF, deltaM);
-        k1 = y - x * m1;
-        k2 = y - x * m2;
-    }
-    
+
     // fine algoritmo
     cout << endl << endl;
-    cout << "delta: " << deltaM << endl;
     
-    if (stato == 0)
+    if (aF != 0)
     {
-        cout << "Errore: non esiste una retta tangente" << endl;
-    }
-    else if (stato == 1)
-    {
-        cout << "Unica equazione: ";
-        stampaEq(m1, k1);
+        deltaM = delta(aF, bF, cF);
+        if (deltaM < 0)
+        {
+            stato = 0;
+        }
+        else if (deltaM == 0)
+        {
+            stato = 1;
+            m1 = valore1(aF, bF, deltaM);
+            k1 = y - x * m1;
+        }
+        else
+        {
+            stato = 2;
+            m1 = valore1(aF, bF, deltaM);
+            m2 = valore2(aF, bF, deltaM);
+            k1 = y - x * m1;
+            k2 = y - x * m2;
+        }
+        // cout << "delta: " << deltaM << endl; // debug only
+
+        if (stato == 0)
+        {
+            cout << "Errore: non esiste una retta tangente" << endl;
+        }
+        else if (stato == 1)
+        {
+            cout << "Unica equazione: ";
+            stampaEqY(m1, k1);
+        }
+        else
+        {
+            cout << "Equazione 1/2: ";
+            stampaEqY(m1, k1);
+            cout << "Equazione 2/2: ";
+            stampaEqY(m2, k2);
+        }
     }
     else
     {
         cout << "Equazione 1/2: ";
-        stampaEq(m1, k1);
+        stampaEqX(x);
+        
+        m2 = -1 * cF / bF;
+        k2 = y - x * m1;
         cout << "Equazione 2/2: ";
-        stampaEq(m2, k2);
+        stampaEqY(m2, k2);
     }
     return 0;
 }
@@ -129,12 +143,27 @@ double valore2(double a, double b, double d)
     return (-b - sqrt(d)) / (2 * a);
 }
 
-void stampaEq(double m, double k)
+void stampaEqY(double m, double k)
 {
+    if (m == 0)
+    {
+        if (k > 0)
+            cout << "y = " << k << endl;
+        else if (k < 0)
+            cout << "y = - " << -k << endl;
+        else
+            cout << "y = 0" << endl;
+        return;
+    }
     if (k > 0)
         cout << "y = " << m << "x + " << k << endl;
     else if (k < 0)
         cout << "y = " << m << "x - " << -k << endl;
     else
         cout << "y = " << m << "x" << endl;
+}
+
+void stampaEqX(double x)
+{
+    cout << "x = " << x << endl;
 }
