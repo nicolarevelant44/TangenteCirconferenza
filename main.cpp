@@ -115,13 +115,20 @@ int main(int argc, char** argv)
     }
     else
     {
-        cout << "Equazione 1/2: ";
-        stampaEqX(x);
-        
-        m2 = -1 * cF / bF;
-        k2 = y - x * m2;
-        cout << "Equazione 2/2: ";
-        stampaEqY(m2, k2);
+        if (bF == 0)
+        {
+            cout << "Unica equazione: ";
+            stampaEqX(x);
+        }
+        else
+        {
+            cout << "Equazione 1/2: ";
+            stampaEqX(x);
+            m2 = -1 * cF / bF;
+            k2 = y - x * m2;
+            cout << "Equazione 2/2: ";
+            stampaEqY(m2, k2);
+        }
     }
     return 0;
 }
