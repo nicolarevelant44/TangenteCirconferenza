@@ -167,3 +167,4 @@ void stampaEqX(double x)
 {
     cout << "x = " << x << endl;
 }
+
