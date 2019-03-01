@@ -119,7 +119,7 @@ int main(int argc, char** argv)
         stampaEqX(x);
         
         m2 = -1 * cF / bF;
-        k2 = y - x * m1;
+        k2 = y - x * m2;
         cout << "Equazione 2/2: ";
         stampaEqY(m2, k2);
     }
@@ -167,4 +167,3 @@ void stampaEqX(double x)
 {
     cout << "x = " << x << endl;
 }
-
