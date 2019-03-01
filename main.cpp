@@ -31,6 +31,11 @@ int main(int argc, char** argv)
 {
     ifstream file;
     file.open("input.txt");
+    if (!file.is_open())
+    {
+        cout << "ERRORE: IMPOSSIBILE LEGGE IL FILE input.txt" << endl << endl;
+        return -1;
+    }
     double aC, bC, cC;
     double a2T, a0T, b2T, b1T, b0T, c2T, c1T, c0T;
     double aF, bF, cF, x, y, m1, m2, k1, k2, deltaM;
