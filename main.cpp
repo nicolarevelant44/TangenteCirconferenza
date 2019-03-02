@@ -42,6 +42,8 @@ int main(int argc, char** argv)
     double aF, bF, cF, x, y, m1, m2, k1, k2, deltaM;
     int stato = 0;
     file >> aC >> bC >> cC >> x >> y;
+    file.close();
+    
     /*cout << "Inserisci a, b, c dell'equazione x^2 + y^2 + ax + by + c = 0\n";
     cout << "Coefficiente a: "; cin >> a;
     cout << "Coefficiente b"; cin >> b;
@@ -55,6 +57,7 @@ int main(int argc, char** argv)
     
     // inizio algoritmo
     
+    // fase 1
     a2T = 1;
     a0T = 1;
     
@@ -66,11 +69,12 @@ int main(int argc, char** argv)
     c1T = -2 * x * y -1 * bC * x;
     c0T = y * y + bC * y + cC;
     
+    // fase 2
     aF = b1T * b1T + 2 * b2T * b0T - 4 * a0T * c2T - 4 * a2T * c0T;
     bF = 2 * b1T * b0T - 4 * a0T * c1T;
     cF = b0T * b0T - 4 * a0T * c0T;
 
-    // fine algoritmo
+    // fase 3
     cout << endl << endl;
     
     if (aF != 0)
@@ -130,6 +134,8 @@ int main(int argc, char** argv)
             stampaEqY(m2, k2);
         }
     }
+    
+    // fine algoritmo
     return 0;
 }
 
@@ -140,9 +146,7 @@ double delta(double a, double b, double c)
 
 double valore1(double a, double b, double d)
 {
-    double sopra = -b + sqrt(d);
-    double sotto = 2 * a;
-    return sopra / sotto;
+    return (-b + sqrt(d)) / (2 * a);
 }
 
 double valore2(double a, double b, double d)
